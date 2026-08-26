@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.rh_picpay.entity.Funcionario;
 import com.example.rh_picpay.enums.StatusFuncionario;
+import com.example.rh_picpay.exception.CampoObrigatorioException;
+import com.example.rh_picpay.exception.FuncionarioNaoEncontradoException;
+import com.example.rh_picpay.exception.IdJaCadastradoException;
 import com.example.rh_picpay.dtos.IndicadoresDTO;
 import java.util.ArrayList;
 
@@ -19,23 +22,23 @@ public class FuncionarioService {
         for (Funcionario f : funcionarios) {
 
             if (f.getId().equals(funcionario.getId())) {
-                throw new RuntimeException("ID já cadastrado");
+                throw new IdJaCadastradoException("ID já cadastrado");
             }
         }
 
         // Verificar nome
         if (funcionario.getNome() == null || funcionario.getNome().isBlank()) {
-            throw new RuntimeException("Nome é obrigatório");
+            throw new CampoObrigatorioException("Nome é obrigatório");
         }
 
         // Verificar e-mail
         if (funcionario.getEmail() == null || funcionario.getEmail().isBlank()) {
-            throw new RuntimeException("E-mail é obrigatório");
+            throw new CampoObrigatorioException("E-mail é obrigatório");
         }
 
         // Verificar cargo
         if (funcionario.getCargo() == null || funcionario.getCargo().isBlank()) {
-            throw new RuntimeException("Cargo é obrigatório");
+            throw new CampoObrigatorioException("Cargo é obrigatório");
         }
 
         // Adicionar funcionário na lista
@@ -60,7 +63,7 @@ public class FuncionarioService {
             }
         }
 
-        throw new RuntimeException("Funcionário não encontrado");
+        throw new FuncionarioNaoEncontradoException("Funcionário não encontrado");
     }
 
     // GET - Buscar por nome, cargo e status
@@ -120,7 +123,7 @@ public class FuncionarioService {
             }
         }
 
-        throw new RuntimeException("Funcionário não encontrado");
+        throw new FuncionarioNaoEncontradoException("Funcionário não encontrado");
     }
 
     // PATCH - Atualizar parcialmente
@@ -166,7 +169,7 @@ public class FuncionarioService {
             }
         }
 
-        throw new RuntimeException("Funcionário não encontrado");
+        throw new FuncionarioNaoEncontradoException("Funcionário não encontrado");
     }
 
     // DELETE - Excluir funcionário
@@ -183,7 +186,7 @@ public class FuncionarioService {
         }
 
         if (funcionarioEncontrado == null) {
-            throw new RuntimeException("Funcionário não encontrado");
+            throw new FuncionarioNaoEncontradoException("Funcionário não encontrado");
         }
 
         funcionarios.remove(funcionarioEncontrado);
