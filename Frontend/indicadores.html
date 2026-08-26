@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indicadores · RH PicPay</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand"><span>RH · PicPay</span><span class="brand__mark">HTTP</span></div>
+      <nav class="nav" data-nav></nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <p class="page-header__eyebrow">GET /funcionarios/indicadores</p>
+        <h1>Indicadores do processo</h1>
+        <p class="page-header__subtitle">Visão geral da situação de todos os candidatos cadastrados.</p>
+      </div>
+      <a href="index.html" class="btn btn--ghost">← Voltar para a lista</a>
+    </div>
+
+    <div id="alerta-erro" class="alerta alerta--erro" hidden></div>
+
+    <div id="estado-carregando" class="estado">
+      <h3>Carregando…</h3>
+      <p>Calculando indicadores na API.</p>
+    </div>
+
+    <div id="conteudo" hidden>
+      <div class="indicadores-grid">
+        <div class="indicador-card">
+          <div class="indicador-card__valor" id="valor-total">0</div>
+          <div class="indicador-card__label">Total</div>
+        </div>
+        <div class="indicador-card">
+          <div class="indicador-card__valor" style="color:var(--amber);" id="valor-em-analise">0</div>
+          <div class="indicador-card__label">Em análise</div>
+        </div>
+        <div class="indicador-card">
+          <div class="indicador-card__valor" style="color:var(--accent-dark);" id="valor-aprovados">0</div>
+          <div class="indicador-card__label">Aprovados</div>
+        </div>
+        <div class="indicador-card">
+          <div class="indicador-card__valor" style="color:var(--rust);" id="valor-reprovados">0</div>
+          <div class="indicador-card__label">Reprovados</div>
+        </div>
+        <div class="indicador-card">
+          <div class="indicador-card__valor" style="color:#2b5a8c;" id="valor-contratados">0</div>
+          <div class="indicador-card__label">Contratados</div>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card__header"><h2>Distribuição por status</h2></div>
+        <div class="card__body">
+          <div class="barra" id="barra-distribuicao"></div>
+          <div id="legenda-distribuicao" style="display:flex; gap:16px; margin-top:14px; flex-wrap:wrap; font-size:13px; color:var(--muted);"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script type="module" src="js/pages/indicadores.js"></script>
+</body>
+</html>
