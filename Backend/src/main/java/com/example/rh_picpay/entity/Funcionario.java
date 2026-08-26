@@ -1,4 +1,4 @@
-package com.example.rh_picpay.model;
+package com.example.rh_picpay.entity;
 
 public class Funcionario {
     private Long id;

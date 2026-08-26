@@ -1,6 +1,6 @@
 package com.example.rh_picpay.controller;
 
-import com.example.rh_picpay.model.Funcionario;
+import com.example.rh_picpay.entity.Funcionario;
 import com.example.rh_picpay.service.FuncionarioService;
 
 import org.springframework.web.bind.annotation.*;
@@ -41,4 +41,18 @@ public class FuncionarioController {
 
         return funcionarioService.atualizar(id, funcionario);
     }
+
+    @PatchMapping("/{id}")
+    public Funcionario atualizarParcialmente(
+            @PathVariable Long id,
+            @RequestBody Funcionario funcionario) {
+
+        return funcionarioService.atualizarParcialmente(id, funcionario);
+    }
+
+    @DeleteMapping("/{id}")
+public void excluir(@PathVariable Long id) {
+
+    funcionarioService.excluir(id);
+}
 }
