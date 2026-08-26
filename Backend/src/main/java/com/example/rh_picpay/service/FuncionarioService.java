@@ -1,7 +1,8 @@
 package com.example.rh_picpay.service;
 
-import com.example.rh_picpay.model.Funcionario;
 import org.springframework.stereotype.Service;
+
+import com.example.rh_picpay.entity.Funcionario;
 
 import java.util.ArrayList;
 
@@ -87,11 +88,61 @@ public class FuncionarioService {
     // PATCH - Atualizar parcialmente
     public Funcionario atualizarParcialmente(Long id, Funcionario funcionarioAtualizado) {
 
-        return null;
+        for (Funcionario funcionario : funcionarios) {
+
+            if (funcionario.getId().equals(id)) {
+
+                if (funcionarioAtualizado.getNome() != null) {
+                    funcionario.setNome(funcionarioAtualizado.getNome());
+                }
+
+                if (funcionarioAtualizado.getEmail() != null) {
+                    funcionario.setEmail(funcionarioAtualizado.getEmail());
+                }
+
+                if (funcionarioAtualizado.getTelefone() != null) {
+                    funcionario.setTelefone(funcionarioAtualizado.getTelefone());
+                }
+
+                if (funcionarioAtualizado.getCargo() != null) {
+                    funcionario.setCargo(funcionarioAtualizado.getCargo());
+                }
+
+                if (funcionarioAtualizado.getDepartamento() != null) {
+                    funcionario.setDepartamento(funcionarioAtualizado.getDepartamento());
+                }
+
+                if (funcionarioAtualizado.getSalario() != null) {
+                    funcionario.setSalario(funcionarioAtualizado.getSalario());
+                }
+
+                if (funcionarioAtualizado.getCidade() != null) {
+                    funcionario.setCidade(funcionarioAtualizado.getCidade());
+                }
+
+                if (funcionarioAtualizado.getStatus() != null) {
+                    funcionario.setStatus(funcionarioAtualizado.getStatus());
+                }
+
+                return funcionario;
+            }
+        }
+
+        throw new RuntimeException("Funcionário não encontrado");
     }
 
-    // DELETE - Excluir
-    public void excluir(Long id) {
+// DELETE - Excluir funcionário
+public void excluir(Long id) {
 
+    for (Funcionario funcionario : funcionarios) {
+
+        if (funcionario.getId().equals(id)) {
+
+            funcionarios.remove(funcionario);
+            return;
+        }
     }
+
+    throw new RuntimeException("Funcionário não encontrado");
+}
 }
