@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar funcionário · RH PicPay</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand"><span>RH · PicPay</span><span class="brand__mark">HTTP</span></div>
+      <nav class="nav" data-nav></nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <p class="page-header__eyebrow" id="eyebrow-pagina">GET /funcionarios/{id}</p>
+        <h1 id="titulo-pagina">Editar funcionário</h1>
+        <p class="page-header__subtitle">Use a atualização completa (PUT) para reenviar todos os dados, ou a parcial (PATCH) para alterar só alguns campos.</p>
+      </div>
+      <a href="index.html" class="btn btn--ghost">← Voltar para a lista</a>
+    </div>
+
+    <div id="alerta-erro" class="alerta alerta--erro" hidden></div>
+
+    <div id="estado-carregando" class="estado">
+      <h3>Carregando…</h3>
+      <p>Buscando os dados do funcionário na API.</p>
+    </div>
+
+    <div id="conteudo" hidden>
+      <section class="card" style="margin-bottom: 24px;">
+        <div class="card__header">
+          <h2>Atualização completa</h2>
+          <span class="http-tag http-tag--put">PUT</span>
+        </div>
+        <div class="card__body">
+          <form id="form-put" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label>ID</label>
+                <input type="number" id="put-id" disabled />
+              </div>
+              <div class="field">
+                <label for="put-nome">Nome *</label>
+                <input type="text" id="put-nome" name="nome" required />
+              </div>
+              <div class="field">
+                <label for="put-email">E-mail *</label>
+                <input type="email" id="put-email" name="email" required />
+              </div>
+              <div class="field">
+                <label for="put-telefone">Telefone</label>
+                <input type="tel" id="put-telefone" name="telefone" />
+              </div>
+              <div class="field">
+                <label for="put-cargo">Cargo *</label>
+                <input type="text" id="put-cargo" name="cargo" required />
+              </div>
+              <div class="field">
+                <label for="put-departamento">Departamento</label>
+                <input type="text" id="put-departamento" name="departamento" />
+              </div>
+              <div class="field">
+                <label for="put-salario">Salário</label>
+                <input type="number" id="put-salario" name="salario" min="0" step="0.01" />
+              </div>
+              <div class="field">
+                <label for="put-cidade">Cidade</label>
+                <input type="text" id="put-cidade" name="cidade" />
+              </div>
+              <div class="field">
+                <label for="put-status">Status</label>
+                <select id="put-status" name="status">
+                  <option value="EM_ANALISE">Em análise</option>
+                  <option value="APROVADO">Aprovado</option>
+                  <option value="REPROVADO">Reprovado</option>
+                  <option value="CONTRATADO">Contratado</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary" id="btn-put">Salvar tudo (PUT)</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="card" style="margin-bottom: 24px;">
+        <div class="card__header">
+          <h2>Atualização parcial</h2>
+          <span class="http-tag http-tag--patch">PATCH</span>
+        </div>
+        <div class="card__body">
+          <p class="field__hint" style="margin-bottom: 16px;">
+            Preencha apenas os campos que deseja alterar. Os campos deixados em branco não são enviados e permanecem como estão.
+          </p>
+          <form id="form-patch" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="patch-cargo">Cargo</label>
+                <input type="text" id="patch-cargo" name="cargo" placeholder="manter atual" />
+              </div>
+              <div class="field">
+                <label for="patch-salario">Salário</label>
+                <input type="number" id="patch-salario" name="salario" min="0" step="0.01" placeholder="manter atual" />
+              </div>
+              <div class="field">
+                <label for="patch-status">Status</label>
+                <select id="patch-status" name="status">
+                  <option value="">Manter atual</option>
+                  <option value="EM_ANALISE">Em análise</option>
+                  <option value="APROVADO">Aprovado</option>
+                  <option value="REPROVADO">Reprovado</option>
+                  <option value="CONTRATADO">Contratado</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary" id="btn-patch">Aplicar alteração parcial (PATCH)</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card__header">
+          <h2>Excluir funcionário</h2>
+          <span class="http-tag http-tag--delete">DELETE</span>
+        </div>
+        <div class="card__body" style="display:flex; align-items:center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+          <p class="field__hint" style="margin:0;">Esta ação remove o funcionário permanentemente da lista da API.</p>
+          <button class="btn btn--danger" id="btn-excluir">Excluir funcionário</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script type="module" src="js/pages/editar.js"></script>
+</body>
+</html>

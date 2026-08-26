@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Novo funcionário · RH PicPay</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand"><span>RH · PicPay</span><span class="brand__mark">HTTP</span></div>
+      <nav class="nav" data-nav></nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <p class="page-header__eyebrow">POST /funcionarios</p>
+        <h1>Cadastrar funcionário</h1>
+        <p class="page-header__subtitle">O ID é definido por você e precisa ser único — a API rejeita IDs repetidos.</p>
+      </div>
+      <a href="index.html" class="btn btn--ghost">← Voltar para a lista</a>
+    </div>
+
+    <div id="alerta-erro" class="alerta alerta--erro" hidden></div>
+
+    <section class="card">
+      <div class="card__body">
+        <form id="form-cadastro" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="id">ID *</label>
+              <input type="number" id="id" name="id" min="1" required />
+              <span class="field__hint">Precisa ser um número ainda não utilizado.</span>
+            </div>
+            <div class="field">
+              <label for="nome">Nome *</label>
+              <input type="text" id="nome" name="nome" required />
+            </div>
+            <div class="field">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="field">
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" name="telefone" />
+            </div>
+            <div class="field">
+              <label for="cargo">Cargo *</label>
+              <input type="text" id="cargo" name="cargo" required />
+            </div>
+            <div class="field">
+              <label for="departamento">Departamento</label>
+              <input type="text" id="departamento" name="departamento" />
+            </div>
+            <div class="field">
+              <label for="salario">Salário</label>
+              <input type="number" id="salario" name="salario" min="0" step="0.01" />
+            </div>
+            <div class="field">
+              <label for="cidade">Cidade</label>
+              <input type="text" id="cidade" name="cidade" />
+            </div>
+            <div class="field">
+              <label for="status">Status</label>
+              <select id="status" name="status">
+                <option value="EM_ANALISE">Em análise</option>
+                <option value="APROVADO">Aprovado</option>
+                <option value="REPROVADO">Reprovado</option>
+                <option value="CONTRATADO">Contratado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary" id="btn-salvar">Cadastrar funcionário</button>
+            <a href="index.html" class="btn btn--ghost">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script type="module" src="js/pages/cadastro.js"></script>
+</body>
+</html>
