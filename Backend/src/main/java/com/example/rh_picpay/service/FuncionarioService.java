@@ -3,7 +3,8 @@ package com.example.rh_picpay.service;
 import org.springframework.stereotype.Service;
 
 import com.example.rh_picpay.entity.Funcionario;
-
+import com.example.rh_picpay.enums.StatusFuncionario;
+import com.example.rh_picpay.dtos.IndicadoresDTO;
 import java.util.ArrayList;
 
 @Service
@@ -60,6 +61,43 @@ public class FuncionarioService {
         }
 
         throw new RuntimeException("Funcionário não encontrado");
+    }
+
+    // GET - Buscar por nome, cargo e status
+    public ArrayList<Funcionario> buscar(
+            String nome,
+            String cargo,
+            StatusFuncionario status) {
+
+        ArrayList<Funcionario> resultado = new ArrayList<>();
+
+        for (Funcionario funcionario : funcionarios) {
+
+            boolean corresponde = true;
+
+            if (nome != null) {
+                corresponde = corresponde &&
+                        funcionario.getNome().toLowerCase()
+                                .contains(nome.toLowerCase());
+            }
+
+            if (cargo != null) {
+                corresponde = corresponde &&
+                        funcionario.getCargo().toLowerCase()
+                                .contains(cargo.toLowerCase());
+            }
+
+            if (status != null) {
+                corresponde = corresponde &&
+                        funcionario.getStatus() == status;
+            }
+
+            if (corresponde) {
+                resultado.add(funcionario);
+            }
+        }
+
+        return resultado;
     }
 
     // PUT - Atualizar completamente
@@ -131,18 +169,58 @@ public class FuncionarioService {
         throw new RuntimeException("Funcionário não encontrado");
     }
 
-// DELETE - Excluir funcionário
-public void excluir(Long id) {
+    // DELETE - Excluir funcionário
+    public void excluir(Long id) {
 
-    for (Funcionario funcionario : funcionarios) {
+        Funcionario funcionarioEncontrado = null;
 
-        if (funcionario.getId().equals(id)) {
+        for (Funcionario funcionario : funcionarios) {
 
-            funcionarios.remove(funcionario);
-            return;
+            if (funcionario.getId().equals(id)) {
+                funcionarioEncontrado = funcionario;
+                break;
+            }
         }
+
+        if (funcionarioEncontrado == null) {
+            throw new RuntimeException("Funcionário não encontrado");
+        }
+
+        funcionarios.remove(funcionarioEncontrado);
     }
 
-    throw new RuntimeException("Funcionário não encontrado");
-}
+    public IndicadoresDTO indicadores() {
+
+        int total = funcionarios.size();
+        int emAnalise = 0;
+        int aprovados = 0;
+        int reprovados = 0;
+        int contratados = 0;
+
+        for (Funcionario funcionario : funcionarios) {
+
+            if (funcionario.getStatus() == StatusFuncionario.EM_ANALISE) {
+                emAnalise++;
+            }
+
+            if (funcionario.getStatus() == StatusFuncionario.APROVADO) {
+                aprovados++;
+            }
+
+            if (funcionario.getStatus() == StatusFuncionario.REPROVADO) {
+                reprovados++;
+            }
+
+            if (funcionario.getStatus() == StatusFuncionario.CONTRATADO) {
+                contratados++;
+            }
+        }
+
+        return new IndicadoresDTO(
+                total,
+                emAnalise,
+                aprovados,
+                reprovados,
+                contratados);
+    }
 }

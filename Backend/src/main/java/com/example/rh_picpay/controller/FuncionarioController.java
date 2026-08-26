@@ -1,9 +1,11 @@
 package com.example.rh_picpay.controller;
 
+import com.example.rh_picpay.dtos.IndicadoresDTO;
 import com.example.rh_picpay.entity.Funcionario;
 import com.example.rh_picpay.service.FuncionarioService;
 
 import org.springframework.web.bind.annotation.*;
+import com.example.rh_picpay.enums.StatusFuncionario;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,15 @@ public class FuncionarioController {
         return funcionarioService.buscarPorId(id);
     }
 
+    @GetMapping("/buscar")
+    public ArrayList<Funcionario> buscar(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String cargo,
+            @RequestParam(required = false) StatusFuncionario status) {
+
+        return funcionarioService.buscar(nome, cargo, status);
+    }
+
     @PutMapping("/{id}")
     public Funcionario atualizar(
             @PathVariable Long id,
@@ -51,8 +62,14 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/{id}")
-public void excluir(@PathVariable Long id) {
+    public void excluir(@PathVariable Long id) {
 
-    funcionarioService.excluir(id);
-}
+        funcionarioService.excluir(id);
+    }
+
+    @GetMapping("/indicadores")
+    public IndicadoresDTO indicadores() {
+
+        return funcionarioService.indicadores();
+    }
 }

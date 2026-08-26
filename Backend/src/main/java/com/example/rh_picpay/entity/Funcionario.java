@@ -1,5 +1,7 @@
 package com.example.rh_picpay.entity;
 
+import com.example.rh_picpay.enums.StatusFuncionario;
+
 public class Funcionario {
     private Long id;
     private String nome;
@@ -9,14 +11,14 @@ public class Funcionario {
     private String departamento;
     private Double salario;
     private String cidade;
-    private String status;
+    private StatusFuncionario status;
 
     public Funcionario() {
     }
 
     public Funcionario(Long id, String nome, String email, String telefone,
                     String cargo, String departamento, Double salario,
-                    String cidade, String status) {
+                    String cidade, StatusFuncionario status) {
 
         this.id = id;
         this.nome = nome;
@@ -93,11 +95,11 @@ public class Funcionario {
         this.cidade = cidade;
     }
 
-    public String getStatus() {
+    public StatusFuncionario getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusFuncionario status) {
         this.status = status;
     }
 }
