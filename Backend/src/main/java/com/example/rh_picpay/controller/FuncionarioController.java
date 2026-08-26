@@ -1,0 +1,44 @@
+package com.example.rh_picpay.controller;
+
+import com.example.rh_picpay.model.Funcionario;
+import com.example.rh_picpay.service.FuncionarioService;
+
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+
+@RestController
+@RequestMapping("/funcionarios")
+public class FuncionarioController {
+    private FuncionarioService funcionarioService;
+
+    public FuncionarioController(FuncionarioService funcionarioService) {
+        this.funcionarioService = funcionarioService;
+    }
+
+    @PostMapping
+    public Funcionario cadastrar(@RequestBody Funcionario funcionario) {
+
+        return funcionarioService.cadastrar(funcionario);
+    }
+
+    @GetMapping
+    public ArrayList<Funcionario> listarTodos() {
+
+        return funcionarioService.listarTodos();
+    }
+
+    @GetMapping("/{id}")
+    public Funcionario buscarPorId(@PathVariable Long id) {
+
+        return funcionarioService.buscarPorId(id);
+    }
+
+    @PutMapping("/{id}")
+    public Funcionario atualizar(
+            @PathVariable Long id,
+            @RequestBody Funcionario funcionario) {
+
+        return funcionarioService.atualizar(id, funcionario);
+    }
+}
