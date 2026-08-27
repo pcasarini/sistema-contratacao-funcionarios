@@ -19,7 +19,7 @@
       <div>
         <p class="page-header__eyebrow" id="eyebrow-pagina">GET /funcionarios/{id}</p>
         <h1 id="titulo-pagina">Editar funcionário</h1>
-        <p class="page-header__subtitle">Use a atualização completa (PUT) para reenviar todos os dados, ou a parcial (PATCH) para alterar só alguns campos.</p>
+        <p class="page-header__subtitle">No PUT, somente os campos preenchidos recebem valor e os demais são enviados como null. No PATCH, somente os campos preenchidos são alterados.</p>
       </div>
       <a href="index.html" class="btn btn--ghost">← Voltar para a lista</a>
     </div>
@@ -35,9 +35,11 @@
       <section class="card" style="margin-bottom: 24px;">
         <div class="card__header">
           <h2>Atualização completa</h2>
-          <span class="http-tag http-tag--put">PUT</span>
         </div>
         <div class="card__body">
+          <p class="field__hint" style="margin-bottom: 16px;">
+            Os campos começam vazios. Preencha o que deseja manter ou alterar; os demais serão enviados como null.
+          </p>
           <form id="form-put" novalidate>
             <div class="form-grid">
               <div class="field">
@@ -45,20 +47,20 @@
                 <input type="number" id="put-id" disabled />
               </div>
               <div class="field">
-                <label for="put-nome">Nome *</label>
-                <input type="text" id="put-nome" name="nome" required />
+                <label for="put-nome">Nome</label>
+                <input type="text" id="put-nome" name="nome" />
               </div>
               <div class="field">
-                <label for="put-email">E-mail *</label>
-                <input type="email" id="put-email" name="email" required />
+                <label for="put-email">E-mail</label>
+                <input type="email" id="put-email" name="email" />
               </div>
               <div class="field">
                 <label for="put-telefone">Telefone</label>
                 <input type="tel" id="put-telefone" name="telefone" />
               </div>
               <div class="field">
-                <label for="put-cargo">Cargo *</label>
-                <input type="text" id="put-cargo" name="cargo" required />
+                <label for="put-cargo">Cargo</label>
+                <input type="text" id="put-cargo" name="cargo" />
               </div>
               <div class="field">
                 <label for="put-departamento">Departamento</label>
@@ -75,6 +77,7 @@
               <div class="field">
                 <label for="put-status">Status</label>
                 <select id="put-status" name="status">
+                  <option value="">Enviar null</option>
                   <option value="EM_ANALISE">Em análise</option>
                   <option value="APROVADO">Aprovado</option>
                   <option value="REPROVADO">Reprovado</option>
@@ -92,7 +95,6 @@
       <section class="card" style="margin-bottom: 24px;">
         <div class="card__header">
           <h2>Atualização parcial</h2>
-          <span class="http-tag http-tag--patch">PATCH</span>
         </div>
         <div class="card__body">
           <p class="field__hint" style="margin-bottom: 16px;">
@@ -101,12 +103,32 @@
           <form id="form-patch" novalidate>
             <div class="form-grid">
               <div class="field">
+                <label for="patch-nome">Nome</label>
+                <input type="text" id="patch-nome" name="nome" placeholder="manter atual" />
+              </div>
+              <div class="field">
+                <label for="patch-email">E-mail</label>
+                <input type="email" id="patch-email" name="email" placeholder="manter atual" />
+              </div>
+              <div class="field">
+                <label for="patch-telefone">Telefone</label>
+                <input type="tel" id="patch-telefone" name="telefone" placeholder="manter atual" />
+              </div>
+              <div class="field">
                 <label for="patch-cargo">Cargo</label>
                 <input type="text" id="patch-cargo" name="cargo" placeholder="manter atual" />
               </div>
               <div class="field">
+                <label for="patch-departamento">Departamento</label>
+                <input type="text" id="patch-departamento" name="departamento" placeholder="manter atual" />
+              </div>
+              <div class="field">
                 <label for="patch-salario">Salário</label>
                 <input type="number" id="patch-salario" name="salario" min="0" step="0.01" placeholder="manter atual" />
+              </div>
+              <div class="field">
+                <label for="patch-cidade">Cidade</label>
+                <input type="text" id="patch-cidade" name="cidade" placeholder="manter atual" />
               </div>
               <div class="field">
                 <label for="patch-status">Status</label>

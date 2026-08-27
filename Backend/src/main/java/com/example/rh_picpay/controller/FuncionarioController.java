@@ -10,6 +10,7 @@ import com.example.rh_picpay.enums.StatusFuncionario;
 import java.util.ArrayList;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
     private FuncionarioService funcionarioService;
